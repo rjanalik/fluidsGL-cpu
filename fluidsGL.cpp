@@ -31,8 +31,8 @@ static cData *vyfield = NULL;
 
 cData *hvfield = NULL;
 
-static int wWidth  = std::max(512, DIM);
-static int wHeight = std::max(512, DIM);
+static int wWidth  = std::max(4*512, DIM);
+static int wHeight = std::max(2*512, DIM);
 
 
 static int clicked  = 0;
