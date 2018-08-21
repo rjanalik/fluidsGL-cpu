@@ -38,6 +38,7 @@ void addForces(cData *v, int dx, int dy, int spx, int spy, float fx, float fy, i
 	
 	int tx, ty;
  	
+#pragma omp parallel for collapse(2) private(tx, ty)
 	for (int y = 0; y < 2*r+1; ++y){
                 for (int x = 0; x < 2*r+1; ++x){
                                  
@@ -65,6 +66,7 @@ void advectVelocity(cData *v, float *vx, float *vy, int dx, int pdx, int dy, flo
 	float vxterm, vyterm;
 	
 	
+#pragma omp parallel for collapse(2) private(vterm, ploc, vxterm, vyterm)
 	for (int y = 0; y < dy; ++y){
 		for (int x = 0; x < dx; ++x){
 			int fj = y * dx + x;
@@ -142,6 +144,7 @@ void diffuseProject(cData *vx, cData *vy, int dx, int dy, float dt, float visc)
 	cData xterm, yterm;
 
 	
+#pragma omp parallel for collapse(2) private(xterm, yterm)
 	for (int y = 0; y < dy; ++y){
 		for (int x = 0; x < dx; ++x){
 			int fj = y * dx + x;
@@ -197,6 +200,7 @@ void updateVelocity(cData *v, float *vx, float *vy, int dx, int pdx, int dy)
 	float vxterm, vyterm;
 	cData nvterm;
 	
+#pragma omp parallel for collapse(2) private(vxterm, vyterm, nvterm)
 	for (int y = 0; y < dy; ++y){
 		for (int x = 0; x < dx; ++x){
 			int fjr = y * pdx + x;
@@ -225,6 +229,7 @@ void advectParticles(cData *ptcl , cData *v, int dx, int dy, float dt)
 
 	cData pterm, vterm;
 
+#pragma omp parallel for collapse(2) private(pterm, vterm)
 	for (int y = 0; y < dy; ++y){
 		for (int x = 0; x < dx; ++x){
 			

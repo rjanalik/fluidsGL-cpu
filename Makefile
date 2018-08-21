@@ -1,15 +1,15 @@
 HOST_OS   := $(shell uname -s 2>/dev/null | tr "[:upper:]" "[:lower:]")
 TARGET_OS ?= $(HOST_OS)
 
-GCC := g++
-#GCC  := g++-7
+#GCC := g++
+GCC  := g++-8
 #PGCC := pgcc
 #GCC := pgc++
 
 #GCCFLAGS := -fast -v -I/usr/local/Cellar/freeglut/3.0.0/include/GL -I/usr/local/Cellar/glew/2.1.0/include/GL
-GCCFLAGS   := -std=c++11 -O3 
+GCCFLAGS   := -std=c++11 -O3 -fopenmp
 PGCCFLAGS     :=
-LDFLAGS     :=
+LDFLAGS     := -fopenmp
 
 ALL_CCFLAGS += $(GCCFLAGS)
 
@@ -24,7 +24,7 @@ ifeq ($(TARGET_OS),darwin)
  LIBRARIES += -L/System/Library/Frameworks/OpenGL.framework/Libraries
  LIBRARIES += -framework OpenGL -framework GLUT
  #LIBRARIES += -lGL -lGLU
- ALL_LDFLAGS += -Xlinker -framework -Xlinker GLUT
+ ALL_LDFLAGS += -Xlinker -framework -Xlinker GLUT $(LDFLAGS)
 else
  LIBRARIES += $(GLLINK)
  LIBRARIES += -lGL -lGLU -lX11 -lglut
