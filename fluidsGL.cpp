@@ -101,7 +101,9 @@ void display(void)
 
 	glClear(GL_COLOR_BUFFER_BIT);
 	// particle color:
-	glColor4f(0,1,0,0.5f);
+	//glColor4f(0,1,0,0.5f);
+   glClearColor(1.f/256*172, 1.f/256*101, 1.f/256*4, 0.f);
+   glColor4f(1.f, 1.f, 1.f, 0.5f);
 	glPointSize(1);
 	glEnable(GL_POINT_SMOOTH);
 	glEnable(GL_BLEND);
